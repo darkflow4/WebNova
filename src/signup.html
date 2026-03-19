@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign-Up Page</title>
+  <link rel="stylesheet" href="style.css"> 
+  
+   <link rel="icon" href="img/favicon.png">
+</head>
+<body class="main">
+    
+  <div class="signup-box">
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+      <input type="text" id="new-username" placeholder="Username" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="new-password" placeholder="Password" required>
+      <button type="submit">Sign Up</button>
+      <p class="error-message" id="signupError"></p>
+    </form>
+    <div style="text-align:center;">
+      <a href="login.html">Already have an account? Login</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const username = document.getElementById("new-username").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("new-password").value.trim();
+      const error = document.getElementById("signupError");
+
+      if (!username || !email || !password) {
+        error.textContent = "All fields are required.";
+        return;
+      }
+
+      if (!validateEmail(email)) {
+        error.textContent = "Please enter a valid email address.";
+        return;
+      }
+
+      if (password.length < 6) {
+        error.textContent = "Password must be at least 6 characters.";
+        return;
+      }
+
+      error.textContent = "";
+      alert(`Account created for ${username}! (This is a mockup)`);
+      window.location.href = "home.html";
+    });
+
+    function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+  </script>
+</body>
+</html>
